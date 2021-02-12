@@ -6,11 +6,11 @@ if(!isset($_REQUEST['id'])) {
 	exit;
 } else {
 	// Check the id is valid or not
-	$statement = $pdo->prepare("SELECT * FROM tbl_customer WHERE cust_id=?");
-	$statement->execute(array($_REQUEST['id']));
+	$statement = $pdo->prepare("SELECT * FROM tbl_customer WHERE cust_id=?"); //preparing the database
+	$statement->execute(array($_REQUEST['id'])); //executing
 	$total = $statement->rowCount();
-	if( $total == 0 ) {
-		header('location: logout.php');
+	if( $total == 0 ) { //if the row is empty
+		header('location: logout.php'); //then relocate to logout.php
 		exit;
 	}
 }
@@ -19,12 +19,8 @@ if(!isset($_REQUEST['id'])) {
 <?php
 
 	// Delete from tbl_customer
-	$statement = $pdo->prepare("DELETE FROM tbl_customer WHERE cust_id=?");
-	$statement->execute(array($_REQUEST['id']));
-
-	// Delete from tbl_rating
-	$statement = $pdo->prepare("DELETE FROM tbl_rating WHERE cust_id=?");
-	$statement->execute(array($_REQUEST['id']));
+	$statement = $pdo->prepare("DELETE FROM tbl_customer WHERE cust_id=?"); //preparing the database
+	$statement->execute(array($_REQUEST['id'])); //executing
 
 	header('location: customer.php');
 ?>
